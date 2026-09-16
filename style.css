@@ -1,23 +1,25 @@
 /* ==========================================================================
    กีฬาสีเชื่อมความสามัคคี 3 หน่วยงาน 2026
-   Design Theme: Vibrant Unity Glassmorphism & Sporty Spirit
-   Fully Responsive (Mobile, Tablet, Desktop)
+   Design Theme: Vibrant Festive Sports Spirit & Premium Glassmorphism
+   Full Responsive (Mobile, Tablet, Desktop)
    ========================================================================== */
 
 :root {
-  /* Dynamic Color Palette */
-  --royal-blue: #2563eb;
-  --royal-blue-hover: #1d4ed8;
-  --royal-blue-glow: rgba(37, 99, 235, 0.35);
+  /* Dynamic Festive Palette (พลังสีสันแห่งงานกีฬาสี) */
+  --cmu-purple: #6d28d9;
+  --cmu-purple-glow: rgba(109, 40, 217, 0.35);
   
-  --coral-energy: #f43f5e;
-  --amber-sun: #f59e0b;
-  --emerald-fresh: #10b981;
-  --violet-unity: #7c3aed;
-  --sky-breeze: #0284c7;
+  --color-team-red: #f43f5e;
+  --color-team-blue: #0284c7;
+  --color-team-green: #10b981;
+  --color-team-yellow: #f59e0b;
+  --color-team-orange: #ea580c;
 
-  /* Neutral Shades */
-  --slate-950: #020617;
+  --gradient-festive: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f59e0b 100%);
+  --gradient-btn: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+  --gradient-btn-hover: linear-gradient(135deg, #4338ca 0%, #6d28d9 50%, #be185d 100%);
+
+  /* Neutral Spectrum */
   --slate-900: #0f172a;
   --slate-800: #1e293b;
   --slate-700: #334155;
@@ -26,19 +28,18 @@
   --slate-400: #94a3b8;
   --slate-200: #e2e8f0;
   --slate-100: #f1f5f9;
-  --slate-50: #f8fafc;
   --white: #ffffff;
 
-  /* Glassmorphism Surface */
+  /* Glassmorphism Styles */
   --glass-surface: rgba(255, 255, 255, 0.94);
-  --glass-border: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.9);
   --glass-card-shadow: 
-    0 20px 45px -15px rgba(30, 41, 59, 0.08),
+    0 24px 50px -15px rgba(99, 102, 241, 0.12),
     0 0 0 1px rgba(226, 232, 240, 0.8),
-    0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    0 4px 12px rgba(0, 0, 0, 0.03);
   --glass-glow-shadow: 
-    0 25px 60px -15px rgba(37, 99, 235, 0.16),
-    0 0 0 1.5px rgba(37, 99, 235, 0.12);
+    0 30px 65px -15px rgba(236, 72, 153, 0.22),
+    0 0 0 1.5px rgba(109, 40, 217, 0.2);
 
   /* Radius System */
   --radius-xs: 8px;
@@ -81,7 +82,7 @@ body {
 }
 
 /* ==========================================================================
-   Ambient Dynamic Mesh Glow
+   Festive Ambient Glows (แสงสีสันบรรยากาศงานกีฬาสีสดใส)
    ========================================================================== */
 .bg-mesh {
   position: fixed;
@@ -94,41 +95,44 @@ body {
 .glow-sphere {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.45;
+  filter: blur(110px);
+  opacity: 0.55;
   animation: orbDrift 22s infinite alternate ease-in-out;
 }
 
+/* สีม่วงสดใส */
 .sphere-1 {
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, #3b82f6 0%, rgba(59, 130, 246, 0) 70%);
-  top: -200px;
-  left: -100px;
+  background: radial-gradient(circle, #8b5cf6 0%, rgba(139, 92, 246, 0) 70%);
+  top: -180px;
+  left: -120px;
 }
 
+/* สีชมพูอมแดงสดใส */
 .sphere-2 {
   width: 550px;
   height: 550px;
   background: radial-gradient(circle, #f43f5e 0%, rgba(244, 63, 94, 0) 70%);
-  top: 35%;
-  right: -120px;
+  top: 30%;
+  right: -100px;
   animation-delay: -6s;
 }
 
+/* สีส้มอมทอง */
 .sphere-3 {
-  width: 500px;
-  height: 500px;
+  width: 520px;
+  height: 520px;
   background: radial-gradient(circle, #f59e0b 0%, rgba(245, 158, 11, 0) 70%);
   bottom: -150px;
-  left: 15%;
+  left: 20%;
   animation-delay: -12s;
 }
 
 @keyframes orbDrift {
   0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(35px, 25px) scale(1.06); }
-  100% { transform: translate(-25px, 40px) scale(0.96); }
+  50% { transform: translate(40px, 30px) scale(1.08); }
+  100% { transform: translate(-30px, 45px) scale(0.95); }
 }
 
 .bg-grid-overlay {
@@ -136,12 +140,12 @@ body {
   inset: 0;
   background-image: radial-gradient(rgba(148, 163, 184, 0.22) 1.2px, transparent 1.2px);
   background-size: 32px 32px;
-  mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
-  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+  mask-image: linear-gradient(to bottom, black 25%, transparent 95%);
+  -webkit-mask-image: linear-gradient(to bottom, black 25%, transparent 95%);
 }
 
 /* ==========================================================================
-   Page Layout & Wrapper
+   Page Layout
    ========================================================================== */
 .app-layout {
   max-width: 860px;
@@ -167,34 +171,36 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(219, 234, 254, 0.9);
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.12);
-  padding: 7px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(216, 180, 254, 0.8);
+  box-shadow: 0 6px 20px rgba(109, 40, 217, 0.14);
+  padding: 8px 22px;
   border-radius: var(--radius-full);
   margin-bottom: 18px;
 }
 
 .pulse-dot {
-  width: 9px;
-  height: 9px;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, #f43f5e, #f59e0b);
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6);
-  animation: pulseUnity 2s infinite;
+  box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7);
+  animation: pulseDot 2s infinite;
 }
 
-@keyframes pulseUnity {
-  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6); }
-  70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+@keyframes pulseDot {
+  0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
 }
 
 .pill-text {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  color: var(--royal-blue);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  background: linear-gradient(135deg, #6d28d9, #be185d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-transform: uppercase;
 }
 
@@ -209,7 +215,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 45%, #e11d48 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #db2777 45%, #ea580c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -220,20 +226,20 @@ body {
   color: var(--slate-600);
   max-width: 660px;
   margin: 0 auto 26px;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 /* Ribbon */
 .hero-stats {
   display: inline-flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--slate-200);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: var(--radius-full);
   padding: 8px 24px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
 .stat-item {
@@ -262,13 +268,24 @@ body {
   background-color: var(--slate-200);
 }
 
+.highlight-stat {
+  background: linear-gradient(135deg, #f3e8ff 0%, #fce7f3 100%);
+  border-radius: var(--radius-full);
+  border: 1px solid #e9d5ff;
+}
+
+.highlight-stat .stat-number {
+  color: #7c3aed;
+  font-size: 1.25rem;
+}
+
 /* ==========================================================================
    Glass Card & Form Container
    ========================================================================== */
 .glass-card {
   background: var(--glass-surface);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--glass-card-shadow);
@@ -281,7 +298,7 @@ body {
 
 .form-section {
   padding: 44px;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 
 .card-header-banner {
@@ -294,16 +311,16 @@ body {
 }
 
 .header-icon-box {
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-  color: var(--royal-blue);
+  background: linear-gradient(135deg, #f5d0fe 0%, #ddd6fe 100%);
+  color: #7c3aed;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.18);
 }
 
 .card-header-banner h2 {
@@ -336,11 +353,11 @@ body {
 .step-num {
   font-size: 0.74rem;
   font-weight: 800;
-  color: var(--royal-blue);
-  background: #eff6ff;
+  color: #7c3aed;
+  background: #f3e8ff;
   padding: 3px 8px;
   border-radius: var(--radius-xs);
-  border: 1px solid #bfdbfe;
+  border: 1px solid #d8b4fe;
 }
 
 .form-grid-2 {
@@ -362,7 +379,7 @@ label {
 }
 
 .required {
-  color: var(--coral-energy);
+  color: var(--color-team-red);
 }
 
 /* Inputs */
@@ -393,7 +410,6 @@ label {
   border-radius: var(--radius-md);
   outline: none;
   transition: all var(--trans-normal);
-  /* Touch target min 48px */
   min-height: 50px;
 }
 
@@ -407,31 +423,31 @@ label {
 }
 
 .input-container input:focus {
-  border-color: var(--royal-blue);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.16);
 }
 
 .input-container input:focus + .input-icon,
 .input-container:focus-within .input-icon {
-  color: var(--royal-blue);
+  color: #7c3aed;
 }
 
 /* Validation */
 .validation-msg {
   display: none;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--coral-energy);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-team-red);
   margin-top: 6px;
 }
 
 .has-error .input-container input {
-  border-color: var(--coral-energy);
+  border-color: var(--color-team-red);
   background-color: #fff1f2;
 }
 
 .has-error .input-icon {
-  color: var(--coral-energy);
+  color: var(--color-team-red);
 }
 
 .has-error .validation-msg {
@@ -504,24 +520,24 @@ label {
   flex-shrink: 0;
 }
 
-/* Active */
+/* Active State for Status */
 .radio-interactive-card input[type="radio"]:checked ~ .card-visual {
-  border-color: var(--royal-blue);
-  background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
-  box-shadow: 0 8px 24px -6px rgba(37, 99, 235, 0.16);
+  border-color: #7c3aed;
+  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+  box-shadow: 0 8px 24px -6px rgba(124, 58, 237, 0.2);
 }
 
 .radio-interactive-card input[type="radio"]:checked ~ .card-visual .card-heading {
-  color: var(--royal-blue);
+  color: #7c3aed;
 }
 
 .radio-interactive-card input[type="radio"]:checked ~ .card-visual .check-indicator {
-  background: var(--royal-blue);
-  border-color: var(--royal-blue);
+  background: #7c3aed;
+  border-color: #7c3aed;
   color: var(--white);
 }
 
-/* Detail Panel */
+/* Expandable Athlete Detail Panel */
 .expandable-panel {
   margin-top: 14px;
   animation: slideExpand 0.3s var(--ease-spring);
@@ -533,9 +549,9 @@ label {
 }
 
 .panel-inner {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border: 1.5px solid var(--slate-200);
-  border-left: 4px solid var(--royal-blue);
+  background: linear-gradient(135deg, #faf5ff 0%, #fdf4ff 100%);
+  border: 1.5px solid #e9d5ff;
+  border-left: 4px solid #7c3aed;
   border-radius: var(--radius-md);
   padding: 18px 20px;
 }
@@ -555,8 +571,8 @@ label {
 .highlight-badge {
   font-size: 0.72rem;
   font-weight: 700;
-  background: #dbeafe;
-  color: var(--royal-blue);
+  background: #ede9fe;
+  color: #6d28d9;
   padding: 3px 10px;
   border-radius: var(--radius-full);
 }
@@ -604,17 +620,17 @@ label {
 
 .switcher-opt input[type="radio"]:checked + .switcher-content {
   background: var(--white);
-  color: var(--royal-blue);
+  color: #7c3aed;
   font-weight: 700;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 /* ==========================================================================
-   Sports Catalog & Card Grid
+   Sports Catalog & Multi-Color Card Grid
    ========================================================================== */
 .sports-catalog {
-  background: rgba(255, 255, 255, 0.75);
-  border: 1.5px dashed var(--slate-300);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px dashed rgba(168, 85, 247, 0.4);
   border-radius: var(--radius-lg);
   padding: 24px;
 }
@@ -636,11 +652,12 @@ label {
 
 .catalog-tag {
   font-size: 0.75rem;
-  background: var(--slate-200);
-  color: var(--slate-600);
-  font-weight: 600;
+  background: linear-gradient(135deg, #ede9fe, #fce7f3);
+  color: #7c3aed;
+  font-weight: 700;
   padding: 3px 12px;
   border-radius: var(--radius-full);
+  border: 1px solid #ddd6fe;
 }
 
 .sports-grid {
@@ -693,30 +710,31 @@ label {
 }
 
 .sport-select-card:hover .sport-card-content {
-  border-color: #93c5fd;
+  border-color: #c084fc;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.12);
 }
 
+/* Active Sport Card */
 .sport-select-card input[type="checkbox"]:checked + .sport-card-content {
-  border-color: var(--royal-blue);
-  background: #eff6ff;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+  border-color: #7c3aed;
+  background: linear-gradient(135deg, #faf5ff 0%, #fdf4ff 100%);
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.18);
 }
 
 .sport-select-card input[type="checkbox"]:checked + .sport-card-content .sport-name {
-  color: var(--royal-blue);
+  color: #7c3aed;
   font-weight: 700;
 }
 
 .sport-select-card input[type="checkbox"]:checked + .sport-card-content .select-check {
-  background-color: var(--royal-blue);
-  border-color: var(--royal-blue);
+  background-color: #7c3aed;
+  border-color: #7c3aed;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
 }
 
 /* ==========================================================================
-   Submit Button
+   Festive Gradient Submit Button
    ========================================================================== */
 .submit-action-area {
   margin-top: 40px;
@@ -731,7 +749,7 @@ label {
   width: 100%;
   max-width: 440px;
   padding: 18px 36px;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: var(--gradient-btn);
   color: var(--white);
   border: none;
   border-radius: var(--radius-full);
@@ -739,29 +757,19 @@ label {
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 14px 30px -6px rgba(124, 58, 237, 0.5);
   transition: all var(--trans-normal);
   min-height: 56px;
 }
 
 .glow-submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 36px -6px rgba(37, 99, 235, 0.55);
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  box-shadow: 0 20px 38px -6px rgba(219, 39, 119, 0.55);
+  background: var(--gradient-btn-hover);
 }
 
 .glow-submit-btn:active {
   transform: translateY(0);
-}
-
-.btn-icon {
-  display: flex;
-  align-items: center;
-  transition: transform var(--trans-fast);
-}
-
-.glow-submit-btn:hover .btn-icon {
-  transform: translateX(4px);
 }
 
 .glow-submit-btn:disabled {
@@ -774,66 +782,68 @@ label {
   to { transform: rotate(360deg); }
 }
 
+.btn-icon {
+  display: flex;
+  align-items: center;
+  transition: transform var(--trans-fast);
+}
+
+.glow-submit-btn:hover .btn-icon {
+  transform: translateX(4px);
+}
+
 .privacy-note {
   font-size: 0.82rem;
   color: var(--slate-500);
   margin-top: 14px;
 }
 
-/* Responses Counter Pill Banner (Bottom) */
+/* ==========================================================================
+   Responses Counter Banner (Bottom)
+   ========================================================================== */
 .responses-pill-banner {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid var(--slate-200);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
   border-radius: var(--radius-full);
-  padding: 12px 24px;
-  max-width: 460px;
-  margin: 0 auto 20px;
-  font-size: 0.94rem;
+  padding: 14px 28px;
+  max-width: 480px;
+  margin: 0 auto 24px;
+  font-size: 0.95rem;
   color: var(--slate-700);
   font-weight: 500;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 24px rgba(109, 40, 217, 0.08);
 }
 
 .live-dot-ping {
   width: 10px;
   height: 10px;
-  background-color: var(--emerald-fresh);
+  background-color: var(--color-team-green);
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
   animation: livePing 1.8s infinite;
   flex-shrink: 0;
 }
 
 @keyframes livePing {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
   70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
   100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 .count-badge {
-  color: var(--royal-blue);
-  font-size: 1.25rem;
+  color: #7c3aed;
+  font-size: 1.3rem;
   font-weight: 800;
-  background: #eff6ff;
-  padding: 2px 10px;
+  background: #f3e8ff;
+  padding: 2px 12px;
   border-radius: var(--radius-xs);
-  border: 1px solid #bfdbfe;
-}
-
-.highlight-stat {
-  background: rgba(239, 246, 255, 0.8);
-  border-radius: var(--radius-full);
-}
-
-.highlight-stat .stat-number {
-  color: var(--royal-blue);
-  font-size: 1.25rem;
+  border: 1px solid #d8b4fe;
 }
 
 /* ==========================================================================
@@ -853,9 +863,9 @@ label {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -883,8 +893,8 @@ label {
 }
 
 .success-check-badge {
-  width: 66px;
-  height: 66px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: var(--white);
@@ -892,7 +902,7 @@ label {
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  box-shadow: 0 10px 24px -5px rgba(16, 185, 129, 0.5);
+  box-shadow: 0 12px 26px -5px rgba(16, 185, 129, 0.55);
 }
 
 .modal-title {
@@ -910,8 +920,8 @@ label {
 }
 
 .ticket-card {
-  background: #f8fafc;
-  border: 1.5px dashed var(--slate-300);
+  background: linear-gradient(135deg, #fdf4ff 0%, #f8fafc 100%);
+  border: 1.5px dashed #d8b4fe;
   border-radius: var(--radius-md);
   padding: 18px;
   text-align: left;
@@ -925,18 +935,19 @@ label {
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 1px;
-  color: var(--slate-400);
-  border-bottom: 1px solid var(--slate-200);
+  color: #7c3aed;
+  border-bottom: 1px solid #e9d5ff;
   padding-bottom: 10px;
   margin-bottom: 12px;
 }
 
 .ticket-id {
-  color: var(--royal-blue);
-  background: #eff6ff;
+  color: #be185d;
+  background: #fce7f3;
   padding: 3px 10px;
   border-radius: var(--radius-xs);
-  border: 1px solid #bfdbfe;
+  border: 1px solid #fbcfe8;
+  font-weight: 800;
 }
 
 .summary-item {
@@ -985,8 +996,6 @@ label {
 /* ==========================================================================
    Responsive Adaptations (Tablet & Mobile Breakpoints)
    ========================================================================== */
-
-/* 1. Tablet Landscape & Small Laptops (769px - 1024px) */
 @media (max-width: 1024px) {
   .app-layout {
     max-width: 740px;
@@ -1002,7 +1011,6 @@ label {
   }
 }
 
-/* 2. Tablet Portrait (641px - 768px) */
 @media (max-width: 768px) {
   .app-layout {
     padding: 36px 16px 70px;
@@ -1046,7 +1054,6 @@ label {
   }
 }
 
-/* 3. Mobile Phones (<= 640px) */
 @media (max-width: 640px) {
   body {
     padding-bottom: 40px;
@@ -1057,13 +1064,13 @@ label {
   }
 
   .brand-pill {
-    padding: 5px 14px;
-    font-size: 0.72rem;
+    padding: 6px 16px;
+    font-size: 0.74rem;
     margin-bottom: 14px;
   }
 
   .main-title {
-    font-size: 1.75rem;
+    font-size: 1.8rem;
     margin-bottom: 10px;
   }
 
@@ -1073,7 +1080,6 @@ label {
     padding: 0;
   }
 
-  /* ปรับแถบริบบิ้นแนวคิดให้กะทัดรัด */
   .hero-stats {
     display: flex;
     justify-content: space-around;
@@ -1099,7 +1105,6 @@ label {
     height: 16px;
   }
 
-  /* Form Card on Mobile */
   .form-section {
     padding: 24px 16px;
     border-radius: var(--radius-md);
@@ -1112,19 +1117,18 @@ label {
   }
 
   .header-icon-box {
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
   }
 
   .card-header-banner h2 {
-    font-size: 1.2rem;
+    font-size: 1.22rem;
   }
 
   .card-header-banner p {
     font-size: 0.82rem;
   }
 
-  /* สถานะนักกีฬา: ปรับการ์ดให้เต็มแถว กดง่ายด้วยนิ้วโป้ง */
   .radio-cards-container {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -1143,7 +1147,6 @@ label {
     font-size: 1.3rem;
   }
 
-  /* Switcher Tab บนจอมือถือ */
   .tab-pill-switcher {
     gap: 6px;
     padding: 4px;
@@ -1155,7 +1158,6 @@ label {
     gap: 6px;
   }
 
-  /* Sports Catalog */
   .sports-catalog {
     padding: 18px 14px;
   }
@@ -1175,7 +1177,6 @@ label {
     padding: 12px 14px;
   }
 
-  /* ปุ่ม Submit เต็มหน้าจอ */
   .glow-submit-btn {
     width: 100%;
     max-width: 100%;
@@ -1183,7 +1184,6 @@ label {
     font-size: 1.05rem;
   }
 
-  /* Modal on Mobile */
   .modal-glass {
     padding: 28px 18px;
     border-radius: var(--radius-lg);
@@ -1200,9 +1200,14 @@ label {
   .summary-item {
     font-size: 0.84rem;
   }
+
+  .responses-pill-banner {
+    padding: 12px 16px;
+    font-size: 0.86rem;
+    flex-wrap: wrap;
+  }
 }
 
-/* 4. Small Mobile Screens (<= 380px เช่น iPhone SE) */
 @media (max-width: 380px) {
   .radio-cards-container {
     grid-template-columns: 1fr;
