@@ -220,10 +220,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // สร้าง Record สำเร็จ
-    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    // สุ่มเลขเด็ด 4 หลัก (0000 - 9999 หรือ 1000 - 9999)
+    const random4Digits = String(Math.floor(1000 + Math.random() * 9000));
     const newRecord = {
-      id: `UNITY-${randomNum}`,
+      id: `LUCKY-${random4Digits}`,
       fullName: fullNameVal,
       email: emailVal,
       isAthlete: isAthleteVal === 'yes',
