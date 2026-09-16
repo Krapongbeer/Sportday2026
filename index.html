@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OOU COLOR GAMES 2026 | มหกรรมกีฬาสีเชื่อมความสามัคคี</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Dynamic Ambient Glow & Grid Background (Color Games Spectrum) -->
+  <div class="bg-mesh">
+    <div class="glow-sphere sphere-1"></div>
+    <div class="glow-sphere sphere-2"></div>
+    <div class="glow-sphere sphere-3"></div>
+    <div class="bg-grid-overlay"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- Header Section: กีฬาสีเชื่อมสัมพันธ์และความสามัคคี -->
+    <header class="app-header">
+      <div class="brand-pill">
+        <span class="pulse-dot"></span>
+        <span class="pill-text">OOU COLOR GAMES 2026</span>
+      </div>
+      <h1 class="main-title">
+        มหกรรมกีฬาสีเชื่อมความสามัคคี <br>
+        <span class="gradient-text">สานสัมพันธ์ 3 หน่วยงาน 2026</span>
+      </h1>
+      <p class="main-desc">
+        กีฬาสีหน่วยงานภายใต้สังกัดสำนักงานมหาวิทยาลัย <br>
+        สำนักงานการตรวจสอบภายใน และสำนักพัฒนาคุณภาพการศึกษา
+      </p>
+
+      <!-- Quick Concept Ribbon with Live Responses Counter -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">🏢</span>
+          <span class="stat-label">3 หน่วยงาน</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">🤝</span>
+          <span class="stat-label">ความสามัคคี</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item highlight-stat">
+          <span class="stat-number pulse-counter" id="totalRespondentsCount">0</span>
+          <span class="stat-label">ผู้ลงทะเบียนแล้ว</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+      
+      <!-- Registration Card -->
+      <section class="glass-card form-section">
+        <div class="card-header-banner">
+          <div class="header-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div>
+            <h2>แบบฟอร์มลงทะเบียนเข้าร่วมกิจกรรมกีฬาสี</h2>
+            <p>บุคลากรสังกัดสำนักงานมหาวิทยาลัย, สำนักงานการตรวจสอบภายใน และสำนักพัฒนาคุณภาพการศึกษา</p>
+          </div>
+        </div>
+
+        <form id="registrationForm" novalidate autocomplete="off">
+          
+          <!-- STEP 1: ข้อมูลส่วนบุคคล -->
+          <div class="form-step-title">
+            <span class="step-num">01</span>
+            <span>ข้อมูลส่วนบุคคล</span>
+          </div>
+
+          <div class="form-grid-2">
+            <!-- 1. ชื่อ-นามสกุล -->
+            <div class="form-group" id="fullNameGroup">
+              <label for="fullName">
+                ชื่อ - นามสกุล <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <div class="input-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </div>
+                <input 
+                  type="text" 
+                  id="fullName" 
+                  name="fullName" 
+                  placeholder="เช่น นายธนวัฒน์ พัฒนชัย" 
+                  required
+                >
+              </div>
+              <span class="validation-msg" id="fullNameError">กรุณากรอกชื่อ-นามสกุล</span>
+            </div>
+
+            <!-- 2. e-mail มหาวิทยาลัย (@cmu.ac.th เท่านั้น) -->
+            <div class="form-group" id="universityEmailGroup">
+              <label for="universityEmail">
+                E-mail มหาวิทยาลัย (@cmu.ac.th) <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <div class="input-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <input 
+                  type="email" 
+                  id="universityEmail" 
+                  name="universityEmail" 
+                  placeholder="เช่น firstname.lastname@cmu.ac.th" 
+                  required
+                >
+              </div>
+              <span class="validation-msg" id="universityEmailError">กรุณาใช้อีเมลมหาวิทยาลัย (@cmu.ac.th เท่านั้น)</span>
+            </div>
+          </div>
+
+          <!-- STEP 2: สถานะเป็นนักกีฬามหาวิทยาลัย -->
+          <div class="form-step-title" style="margin-top: 24px;">
+            <span class="step-num">02</span>
+            <span>สถานะเป็นนักกีฬามหาวิทยาลัย</span>
+          </div>
+
+          <div class="form-group" id="athleteStatusGroup">
+            <div class="radio-cards-container">
+              <!-- ไม่เป็น -->
+              <label class="radio-interactive-card" id="cardAthleteNo">
+                <input type="radio" name="isAthlete" value="no" checked>
+                <div class="card-visual">
+                  <div class="visual-icon">❌</div>
+                  <div class="visual-info">
+                    <span class="card-heading">ไม่เป็น</span>
+                  </div>
+                  <div class="check-indicator">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                </div>
+              </label>
+
+              <!-- เป็น -->
+              <label class="radio-interactive-card" id="cardAthleteYes">
+                <input type="radio" name="isAthlete" value="yes">
+                <div class="card-visual">
+                  <div class="visual-icon">🏅</div>
+                  <div class="visual-info">
+                    <span class="card-heading">เป็น</span>
+                  </div>
+                  <div class="check-indicator">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <!-- กล่องกรอกรายละเอียดเมื่อเป็นนักกีฬา -->
+            <div class="expandable-panel hidden" id="athleteDetailBox">
+              <div class="panel-inner">
+                <div class="panel-label">
+                  <span class="highlight-badge">ข้อมูลตัวแทน</span>
+                  <label for="athleteSportDetail">ระบุชนิดกีฬาที่เป็นตัวแทนมหาวิทยาลัย <span class="required">*</span></label>
+                </div>
+                <div class="input-container">
+                  <div class="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                  </div>
+                  <input 
+                    type="text" 
+                    id="athleteSportDetail" 
+                    name="athleteSportDetail" 
+                    placeholder="เช่น นักกีฬาวอลเลย์บอลทีมมหาวิทยาลัย, กีฬายิงปืน"
+                  >
+                </div>
+                <span class="validation-msg" id="athleteSportDetailError">กรุณาระบุชนิดกีฬาที่เป็นตัวแทนมหาวิทยาลัย</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: ประเภทกีฬาที่สนใจแข่งขัน -->
+          <div class="form-step-title" style="margin-top: 24px;">
+            <span class="step-num">03</span>
+            <span>ประเภทกีฬาที่สนใจแข่งขัน</span>
+          </div>
+
+          <div class="form-group">
+            <div class="tab-pill-switcher">
+              <label class="switcher-opt">
+                <input type="radio" name="joinCompetition" value="interested" checked>
+                <div class="switcher-content">
+                  <span class="switcher-icon">🔥</span>
+                  <span>มีให้เลือก</span>
+                </div>
+              </label>
+              <label class="switcher-opt">
+                <input type="radio" name="joinCompetition" value="not_interested">
+                <div class="switcher-content">
+                  <span class="switcher-icon">📣</span>
+                  <span>สนใจเป็นกองเชียร์</span>
+                </div>
+              </label>
+            </div>
+
+            <!-- ส่วนเลือกกีฬาเมื่อสนใจแข่งขัน (ถ้าเลือก ไม่สนใจแข่งขัน กล่องนี้จะว่างเปล่าทันที) -->
+            <div class="sports-catalog" id="sportSelectionBox">
+              <div class="catalog-header">
+                <span class="catalog-title">เลือกกีฬาที่ต้องการลงแข่งขันในนามสี</span>
+                <span class="catalog-tag">เลือกได้มากกว่า 1 ชนิด</span>
+              </div>
+
+              <div class="sports-grid">
+                <label class="sport-select-card">
+                  <input type="checkbox" name="sports" value="ฟุตบอล / ฟุตซอล">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">⚽</span>
+                    <span class="sport-name">ฟุตบอล / ฟุตซอล</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+
+                <label class="sport-select-card">
+                  <input type="checkbox" name="sports" value="บาสเกตบอล">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">🏀</span>
+                    <span class="sport-name">บาสเกตบอล</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+
+                <label class="sport-select-card">
+                  <input type="checkbox" name="sports" value="วอลเลย์บอล">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">🏐</span>
+                    <span class="sport-name">วอลเลย์บอล</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+
+                <label class="sport-select-card">
+                  <input type="checkbox" name="sports" value="แบดมินตัน">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">🏸</span>
+                    <span class="sport-name">แบดมินตัน</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+
+                <label class="sport-select-card">
+                  <input type="checkbox" name="sports" value="เทเบิลเทนนิส">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">🏓</span>
+                    <span class="sport-name">เทเบิลเทนนิส</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+
+                <label class="sport-select-card">
+                  <input type="checkbox" name="sports" value="กรีฑา / วิ่งผลัดสามัคคี">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">🏃</span>
+                    <span class="sport-name">กรีฑา / วิ่งผลัด</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+
+                <label class="sport-select-card">
+                  <input type="checkbox" name="sports" value="เปตอง">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">🎯</span>
+                    <span class="sport-name">เปตอง</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+
+                <label class="sport-select-card">
+                  <input type="checkbox" name="sports" value="E-Sports">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">🎮</span>
+                    <span class="sport-name">E-Sports</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+
+                <label class="sport-select-card">
+                  <input type="checkbox" name="sports" value="กีฬาพื้นบ้าน / สานสัมพันธ์">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">🪢</span>
+                    <span class="sport-name">กีฬาฮาเฮ / สานสัมพันธ์</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+
+                <label class="sport-select-card" id="otherSportCard">
+                  <input type="checkbox" name="sports" value="other" id="otherSportCheck">
+                  <div class="sport-card-content">
+                    <span class="sport-emoji">✨</span>
+                    <span class="sport-name">กีฬาอื่นๆ...</span>
+                    <span class="select-check"></span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- ช่องระบุกีฬาอื่นๆ -->
+              <div class="expandable-panel hidden" id="otherSportDetailBox" style="margin-top: 14px;">
+                <div class="panel-inner">
+                  <label for="otherSportDetail">ระบุชนิดกีฬาอื่นๆ ที่ต้องการแข่งขัน</label>
+                  <div class="input-container">
+                    <input 
+                      type="text" 
+                      id="otherSportDetail" 
+                      name="otherSportDetail" 
+                      placeholder="เช่น ชักเย่อ, ว่ายน้ำ, วิ่งกระสอบ"
+                    >
+                  </div>
+                  <span class="validation-msg" id="otherSportDetailError">กรุณาระบุชนิดกีฬาอื่นๆ</span>
+                </div>
+              </div>
+
+              <span class="validation-msg" id="sportsError" style="margin-top: 10px;">⚠️ กรุณาเลือกกีฬาที่สนใจอย่างน้อย 1 ชนิด</span>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="submit-action-area">
+            <button type="submit" class="glow-submit-btn" id="submitBtn">
+              <span class="btn-text">ส่งข้อมูลร่วมกิจกรรม</span>
+              <div class="btn-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </button>
+            <p class="privacy-note">🤝 สานสัมพันธ์ ร่วมใจเป็นหนึ่งเดียวในงานกีฬาสี OOU 2026</p>
+          </div>
+        </form>
+      </section>
+
+      <!-- Bottom Responses Counter Banner -->
+      <div class="responses-pill-banner">
+        <div class="live-dot-ping"></div>
+        <span>จำนวนผู้ตอบแบบสอบถาม/ลงทะเบียนแล้วขณะนี้:</span>
+        <strong class="count-badge" id="bottomRespondentsCount">0</strong>
+        <span>คน</span>
+      </div>
+
+    </main>
+
+    <footer class="app-footer">
+      <p>© 2026 กีฬาสีเชื่อมความสามัคคี | สำนักงานมหาวิทยาลัย • สำนักงานการตรวจสอบภายใน • สำนักพัฒนาคุณภาพการศึกษา</p>
+    </footer>
+  </div>
+
+  <!-- Modern Success Modal -->
+  <div class="modal-backdrop hidden" id="successModal">
+    <div class="modal-glass">
+      <div class="modal-glow"></div>
+      <div class="success-check-badge">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <h2 class="modal-title">ลงทะเบียนสำเร็จ!</h2>
+      <p class="modal-description">ขอบคุณที่ร่วมเป็นส่วนหนึ่งในกิจกรรมกีฬาสีเชื่อมความสามัคคี 3 หน่วยงาน 2026</p>
+
+      <div class="ticket-card">
+        <div class="ticket-header">
+          <span>OOU COLOR GAMES PASS</span>
+          <span id="modalRegId" class="ticket-id">COLOR-XXXX</span>
+        </div>
+        <div class="ticket-body" id="summaryDetails">
+          <!-- Dynamic details injected by JavaScript -->
+        </div>
+      </div>
+
+      <button type="button" class="btn-modal-close" id="closeModalBtn">
+        ปิดหน้าต่างนี้
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
