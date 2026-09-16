@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModalBtn = document.getElementById('closeModalBtn');
 
   // Google Apps Script Web App Endpoint
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzml9Q7Z19VhTBc31Y3Mlux1uXvMi6--FZTQ6XYRWkMvEOc62vA3bO3-wvpDq5e0_JH/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlrymCzThQZu_9fbvHqJf09wjp5vbMVHtP4K9w0AUSKVPGRlfMdEzHzz30hwmkWdyF/exec';
   const submitBtn = document.getElementById('submitBtn');
 
   // Respondent Counter Elements
