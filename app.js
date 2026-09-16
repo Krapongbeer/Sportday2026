@@ -237,15 +237,28 @@ document.addEventListener('DOMContentLoaded', () => {
                  new Date().toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' })
     };
 
-    // แสดงสถานะกำลังบันทึกข้อมูล
+    // 1. แสดงสถานะตอบรับแบบทันที (Optimistic Response)
     const originalBtnContent = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = `
-      <span class="btn-text">กำลังบันทึกข้อมูล...</span>
+      <span class="btn-text">กำลังออกบัตร...</span>
       <div class="spinner" style="width:18px;height:18px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.6s linear infinite;"></div>
     `;
 
-    // ส่งข้อมูลไปยัง Google Sheets Web App รองรับทั้ง URLSearchParams และ FormData
+    // 2. บันทึกลง Local Cache และเปิดบัตรผู้เข้าร่วมงานทันทีโดยไม่ต้องรอ Google Apps Script (ลดเวลารอจาก 3-5 วิ เหลือ 0.2 วิ)
+    saveRecord(newRecord);
+
+    // ปรับตัวเลขนับจำนวนขึ้นแบบ Optimistic ล่วงหน้าทันที
+    if (totalRespondentsCount) {
+      const current = parseInt(totalRespondentsCount.textContent) || 0;
+      totalRespondentsCount.textContent = current + 1;
+    }
+    if (bottomRespondentsCount) {
+      const currentBottom = parseInt(bottomRespondentsCount.textContent) || 0;
+      bottomRespondentsCount.textContent = currentBottom + 1;
+    }
+
+    // เตรียม Payload สำหรับส่งไป Google Apps Script
     const payload = new URLSearchParams();
     payload.append('id', newRecord.id);
     payload.append('timestamp', newRecord.timestamp);
@@ -256,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
     payload.append('joinCompetition', newRecord.joinCompetition ? 'มีให้เลือก' : 'สนใจเป็นกองเชียร์');
     payload.append('sports', newRecord.sports.join(', '));
 
-    // ใช้ URLSearchParams และ no-cors
+    // ส่งข้อมูลไป Google Apps Script เบื้องหลัง (Background Transmission)
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
@@ -266,19 +279,18 @@ document.addEventListener('DOMContentLoaded', () => {
       body: payload.toString()
     })
     .then(() => {
-      console.log('Sent data to Google Apps Script successfully');
+      console.log('Background sync to Google Sheets completed.');
+      // ดึงค่ายืนยันล่าสุดจาก Google Sheets มาซิงก์อีกครั้ง
+      fetchSheetCount();
     })
     .catch((err) => {
-      console.warn('Transmission note:', err);
-    })
-    .finally(() => {
-      // คืนสถานะปุ่ม
+      console.warn('Background sync note:', err);
+    });
+
+    // 3. แสดงผลบัตรทันทีภายใน 250ms เพื่อ UX ที่ลื่นไหลและรวดเร็ว
+    setTimeout(() => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnContent;
-
-      // บันทึกลง LocalStorage และอัปเดตจำนวนผู้ตอบ
-      saveRecord(newRecord);
-      updateCounter();
 
       // แสดงบัตรลงทะเบียน
       showSuccessTicket(newRecord);
@@ -291,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sportSelectionBox.style.display = 'block';
       otherSportDetailBox.classList.add('hidden');
       otherSportDetailBox.style.display = 'none';
-    });
+    }, 250);
   });
 
   // ฟังก์ชันดึงจำนวนผู้ลงทะเบียนจริงจาก Google Sheets
