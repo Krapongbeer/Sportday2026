@@ -294,7 +294,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Storage & Counter Handlers
+  // ฟังก์ชันดึงจำนวนผู้ลงทะเบียนจริงจาก Google Sheets
+  function fetchSheetCount() {
+    fetch(GOOGLE_SCRIPT_URL)
+      .then(res => res.json())
+      .then(data => {
+        if (data && typeof data.count !== 'undefined') {
+          if (totalRespondentsCount) totalRespondentsCount.textContent = data.count;
+          if (bottomRespondentsCount) bottomRespondentsCount.textContent = data.count;
+        }
+      })
+      .catch(() => {
+        // หากเน็ตขัดข้อง ให้ใช้ค่าจาก local cache
+        const count = getRecords().length;
+        if (totalRespondentsCount) totalRespondentsCount.textContent = count;
+        if (bottomRespondentsCount) bottomRespondentsCount.textContent = count;
+      });
+  }
+
+  // Storage Handlers (Local Cache)
   function getRecords() {
     try {
       const data = localStorage.getItem(STORAGE_KEY);
@@ -319,17 +337,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateCounter() {
-    const count = getRecords().length;
-    if (totalRespondentsCount) {
-      totalRespondentsCount.textContent = count;
-    }
-    if (bottomRespondentsCount) {
-      bottomRespondentsCount.textContent = count;
-    }
+    fetchSheetCount();
   }
 
-  // โหลดจำนวนผู้ตอบเริ่มต้น
-  updateCounter();
+  // โหลดจำนวนผู้ตอบเริ่มต้นจาก Google Sheet จริง
+  fetchSheetCount();
 
   // ฟังก์ชันป้องกัน XSS Injection ก่อนแสดงผล
   function escapeHtml(str) {
