@@ -166,13 +166,16 @@ document.addEventListener('DOMContentLoaded', () => {
       clearError(fullNameInput, fullNameError);
     }
 
-    // ตรวจสอบอีเมล ต้องเป็น @cmu.ac.th เท่านั้น
+    // ตรวจสอบอีเมล ต้องเป็น @cmu.ac.th เท่านั้น และห้ามซ้ำ
     const emailVal = universityEmailInput.value.trim().toLowerCase();
     if (!emailVal) {
       showError(universityEmailInput, universityEmailError, 'กรุณากรอก E-mail มหาวิทยาลัย');
       isValid = false;
     } else if (!isValidEmail(emailVal)) {
       showError(universityEmailInput, universityEmailError, 'กรุณาใช้อีเมลมหาวิทยาลัยที่ลงท้ายด้วย @cmu.ac.th เท่านั้น');
+      isValid = false;
+    } else if (isEmailAlreadyRegistered(emailVal)) {
+      showError(universityEmailInput, universityEmailError, '⚠️ อีเมลนี้ลงทะเบียนเรียบร้อยแล้ว ไม่สามารถลงทะเบียนซ้ำได้');
       isValid = false;
     } else {
       clearError(universityEmailInput, universityEmailError);
