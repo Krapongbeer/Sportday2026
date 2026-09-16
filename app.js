@@ -38,7 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Respondent Counter Elements
   const totalRespondentsCount = document.getElementById('totalRespondentsCount');
   const bottomRespondentsCount = document.getElementById('bottomRespondentsCount');
-  const STORAGE_KEY = 'oou_sport_2026_registrations';
+  const STORAGE_KEY = 'oou_sport_2026_registrations_v2';
+  
+  // ล้างแคชเก่าที่ตกค้างจากการทดสอบ
+  try {
+    localStorage.removeItem('oou_sport_2026_registrations');
+  } catch (e) {}
 
   // 1. จัดการสถานะเป็นนักกีฬามหาวิทยาลัย (เป็น / ไม่เป็น)
   athleteRadios.forEach(radio => {
@@ -161,16 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
       clearError(fullNameInput, fullNameError);
     }
 
-    // ตรวจสอบอีเมล ต้องเป็น @cmu.ac.th เท่านั้น และต้องไม่ซ้ำ
+    // ตรวจสอบอีเมล ต้องเป็น @cmu.ac.th เท่านั้น
     const emailVal = universityEmailInput.value.trim().toLowerCase();
     if (!emailVal) {
       showError(universityEmailInput, universityEmailError, 'กรุณากรอก E-mail มหาวิทยาลัย');
       isValid = false;
     } else if (!isValidEmail(emailVal)) {
       showError(universityEmailInput, universityEmailError, 'กรุณาใช้อีเมลมหาวิทยาลัยที่ลงท้ายด้วย @cmu.ac.th เท่านั้น');
-      isValid = false;
-    } else if (isEmailAlreadyRegistered(emailVal)) {
-      showError(universityEmailInput, universityEmailError, '⚠️ อีเมลนี้ลงทะเบียนเรียบร้อยแล้ว ไม่สามารถลงทะเบียนซ้ำได้');
       isValid = false;
     } else {
       clearError(universityEmailInput, universityEmailError);
