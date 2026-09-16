@@ -312,12 +312,18 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(res => res.json())
       .then(data => {
         if (data && typeof data.count !== 'undefined') {
-          if (totalRespondentsCount) totalRespondentsCount.textContent = data.count;
-          if (bottomRespondentsCount) bottomRespondentsCount.textContent = data.count;
+          const sheetCount = Number(data.count);
+          if (totalRespondentsCount) totalRespondentsCount.textContent = sheetCount;
+          if (bottomRespondentsCount) bottomRespondentsCount.textContent = sheetCount;
+
+          // หากข้อมูลใน Google Sheets ถูกล้างจนเหลือ 0 (เช่น แอดมินลบแถวทดสอบ)
+          // ให้เคลียร์ local cache ในเบราว์เซอร์ออกด้วย เพื่อไม่ให้ติดเตือน "อีเมลซ้ำ"
+          if (sheetCount === 0) {
+            localStorage.removeItem(STORAGE_KEY);
+          }
         }
       })
       .catch(() => {
-        // หากเน็ตขัดข้อง ให้ใช้ค่าจาก local cache
         const count = getRecords().length;
         if (totalRespondentsCount) totalRespondentsCount.textContent = count;
         if (bottomRespondentsCount) bottomRespondentsCount.textContent = count;
