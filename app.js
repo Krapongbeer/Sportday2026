@@ -44,9 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
   athleteRadios.forEach(radio => {
     radio.addEventListener('change', (e) => {
       if (e.target.value === 'yes') {
+        athleteDetailBox.classList.remove('hidden');
         athleteDetailBox.style.display = 'block';
         setTimeout(() => athleteSportDetailInput.focus(), 150);
       } else {
+        athleteDetailBox.classList.add('hidden');
         athleteDetailBox.style.display = 'none';
         athleteSportDetailInput.value = '';
         clearError(athleteSportDetailInput, athleteSportDetailError);
@@ -59,12 +61,15 @@ document.addEventListener('DOMContentLoaded', () => {
   competitionRadios.forEach(radio => {
     radio.addEventListener('change', (e) => {
       if (e.target.value === 'interested') {
+        sportSelectionBox.classList.remove('hidden');
         sportSelectionBox.style.display = 'block';
       } else {
+        sportSelectionBox.classList.add('hidden');
         sportSelectionBox.style.display = 'none';
         
         // ล้างค่าที่เลือกไว้ทั้งหมด
         sportCheckboxes.forEach(cb => cb.checked = false);
+        otherSportDetailBox.classList.add('hidden');
         otherSportDetailBox.style.display = 'none';
         otherSportDetailInput.value = '';
         sportsError.style.display = 'none';
@@ -77,9 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (otherSportCheck) {
     otherSportCheck.addEventListener('change', () => {
       if (otherSportCheck.checked) {
+        otherSportDetailBox.classList.remove('hidden');
         otherSportDetailBox.style.display = 'block';
         setTimeout(() => otherSportDetailInput.focus(), 150);
       } else {
+        otherSportDetailBox.classList.add('hidden');
         otherSportDetailBox.style.display = 'none';
         otherSportDetailInput.value = '';
         clearError(otherSportDetailInput, otherSportDetailError);
@@ -172,6 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isAthleteVal === 'yes') {
       athleteSportDesc = athleteSportDetailInput.value.trim();
       if (!athleteSportDesc) {
+        // เปิดกล่องให้เห็นหากยังซ่อนอยู่
+        athleteDetailBox.classList.remove('hidden');
+        athleteDetailBox.style.display = 'block';
         showError(athleteSportDetailInput, athleteSportDetailError, 'กรุณาระบุชนิดกีฬาที่เป็นตัวแทนมหาวิทยาลัย');
         isValid = false;
       } else {
@@ -232,27 +242,31 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spinner" style="width:18px;height:18px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.6s linear infinite;"></div>
     `;
 
-    // ส่งข้อมูลไปยัง Google Sheets Web App
-    const formData = new FormData();
-    formData.append('id', newRecord.id);
-    formData.append('fullName', newRecord.fullName);
-    formData.append('email', newRecord.email);
-    formData.append('isAthlete', newRecord.isAthlete ? 'เป็น' : 'ไม่เป็น');
-    formData.append('athleteDetail', newRecord.athleteDetail || '-');
-    formData.append('joinCompetition', newRecord.joinCompetition ? 'มีให้เลือก' : 'สนใจเป็นกองเชียร์');
-    formData.append('sports', newRecord.sports.join(', '));
-    formData.append('timestamp', newRecord.timestamp);
+    // ส่งข้อมูลไปยัง Google Sheets Web App รองรับทั้ง URLSearchParams และ FormData
+    const payload = new URLSearchParams();
+    payload.append('id', newRecord.id);
+    payload.append('timestamp', newRecord.timestamp);
+    payload.append('fullName', newRecord.fullName);
+    payload.append('email', newRecord.email);
+    payload.append('isAthlete', newRecord.isAthlete ? 'เป็น' : 'ไม่เป็น');
+    payload.append('athleteDetail', newRecord.athleteDetail || '-');
+    payload.append('joinCompetition', newRecord.joinCompetition ? 'มีให้เลือก' : 'สนใจเป็นกองเชียร์');
+    payload.append('sports', newRecord.sports.join(', '));
 
+    // ใช้ URLSearchParams และ no-cors
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      body: formData
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: payload.toString()
     })
     .then(() => {
-      console.log('Successfully sent to Google Sheets');
+      console.log('Sent data to Google Apps Script successfully');
     })
     .catch((err) => {
-      console.warn('Google Sheets transmission note:', err);
+      console.warn('Transmission note:', err);
     })
     .finally(() => {
       // คืนสถานะปุ่ม
@@ -268,8 +282,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // รีเซ็ตฟอร์ม
       form.reset();
+      athleteDetailBox.classList.add('hidden');
       athleteDetailBox.style.display = 'none';
+      sportSelectionBox.classList.remove('hidden');
       sportSelectionBox.style.display = 'block';
+      otherSportDetailBox.classList.add('hidden');
       otherSportDetailBox.style.display = 'none';
     });
   });
