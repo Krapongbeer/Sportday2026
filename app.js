@@ -161,13 +161,16 @@ document.addEventListener('DOMContentLoaded', () => {
       clearError(fullNameInput, fullNameError);
     }
 
-    // ตรวจสอบอีเมล ต้องเป็น @cmu.ac.th เท่านั้น
-    const emailVal = universityEmailInput.value.trim();
+    // ตรวจสอบอีเมล ต้องเป็น @cmu.ac.th เท่านั้น และต้องไม่ซ้ำ
+    const emailVal = universityEmailInput.value.trim().toLowerCase();
     if (!emailVal) {
       showError(universityEmailInput, universityEmailError, 'กรุณากรอก E-mail มหาวิทยาลัย');
       isValid = false;
     } else if (!isValidEmail(emailVal)) {
       showError(universityEmailInput, universityEmailError, 'กรุณาใช้อีเมลมหาวิทยาลัยที่ลงท้ายด้วย @cmu.ac.th เท่านั้น');
+      isValid = false;
+    } else if (isEmailAlreadyRegistered(emailVal)) {
+      showError(universityEmailInput, universityEmailError, '⚠️ อีเมลนี้ลงทะเบียนเรียบร้อยแล้ว ไม่สามารถลงทะเบียนซ้ำได้');
       isValid = false;
     } else {
       clearError(universityEmailInput, universityEmailError);
@@ -299,6 +302,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch {
       return [];
     }
+  }
+
+  // ตรวจสอบว่ามีอีเมลนี้ลงทะเบียนไปแล้วหรือไม่
+  function isEmailAlreadyRegistered(email) {
+    if (!email) return false;
+    const records = getRecords();
+    const cleanEmail = email.trim().toLowerCase();
+    return records.some(r => r.email && r.email.trim().toLowerCase() === cleanEmail);
   }
 
   function saveRecord(record) {
