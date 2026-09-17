@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     payload.append('joinCompetition', newRecord.joinCompetition ? 'มีให้เลือก' : 'สนใจเป็นกองเชียร์');
     payload.append('sports', newRecord.sports.join(', '));
 
-    // ส่งข้อมูลไป Google Apps Script เบื้องหลัง (Background Transmission)
+    // ส่งข้อมูลไป Google Apps Script และอัปเดตแบบ Realtime ทันที
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
@@ -285,8 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(() => {
       console.log('Background sync to Google Sheets completed.');
-      // ดึงค่ายืนยันล่าสุดจาก Google Sheets มาซิงก์อีกครั้ง
-      fetchSheetCount();
+      // ดึงค่ายืนยันล่าสุดจาก Google Sheets มาอัปเดต Realtime
+      setTimeout(() => fetchSheetCount(true), 800);
+      setTimeout(() => fetchSheetCount(true), 2500);
     })
     .catch((err) => {
       console.warn('Background sync note:', err);
@@ -311,15 +312,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 250);
   });
 
-  // ฟังก์ชันดึงจำนวนผู้ลงทะเบียนจริงจาก Google Sheets
-  function fetchSheetCount() {
-    fetch(GOOGLE_SCRIPT_URL)
+  // ฟังก์ชันแสดงตัวเลขอัปเดตพร้อมเอฟเฟกต์แอนิเมชัน
+  function animateCountChange(element, newCount) {
+    if (!element) return;
+    const current = Number(element.textContent) || 0;
+    if (current !== newCount) {
+      element.style.transform = 'scale(1.25)';
+      element.style.transition = 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease';
+      element.textContent = newCount;
+      setTimeout(() => {
+        element.style.transform = 'scale(1)';
+      }, 250);
+    } else {
+      element.textContent = newCount;
+    }
+  }
+
+  // ฟังก์ชันดึงจำนวนผู้ลงทะเบียนจริงจาก Google Sheets แบบ Real-time (ป้องกัน HTTP Cache 100%)
+  function fetchSheetCount(forceFresh = false) {
+    const cacheBuster = `?t=${Date.now()}_${Math.random().toString(36).substring(7)}`;
+    const url = GOOGLE_SCRIPT_URL + cacheBuster;
+
+    fetch(url, {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
+      }
+    })
       .then(res => res.json())
       .then(data => {
         if (data && typeof data.count !== 'undefined') {
           const sheetCount = Number(data.count);
-          if (totalRespondentsCount) totalRespondentsCount.textContent = sheetCount;
-          if (bottomRespondentsCount) bottomRespondentsCount.textContent = sheetCount;
+          animateCountChange(totalRespondentsCount, sheetCount);
+          animateCountChange(bottomRespondentsCount, sheetCount);
 
           // หากข้อมูลใน Google Sheets ถูกล้างจนเหลือ 0 (เช่น แอดมินลบแถวทดสอบ)
           // ให้เคลียร์ local cache ในเบราว์เซอร์ออกด้วย เพื่อไม่ให้ติดเตือน "อีเมลซ้ำ"
@@ -329,11 +355,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
       .catch(() => {
+        // กรณีออฟไลน์ให้แสดงตาม cache
         const count = getRecords().length;
-        if (totalRespondentsCount) totalRespondentsCount.textContent = count;
-        if (bottomRespondentsCount) bottomRespondentsCount.textContent = count;
+        if (totalRespondentsCount && totalRespondentsCount.textContent === '0' && count > 0) {
+          totalRespondentsCount.textContent = count;
+        }
+        if (bottomRespondentsCount && bottomRespondentsCount.textContent === '0' && count > 0) {
+          bottomRespondentsCount.textContent = count;
+        }
       });
   }
+
+  // Real-time Polling & Automatic Refresh:
+  // 1. ดึงทันทีเมื่อเปิดเข้าเว็บ
+  fetchSheetCount(true);
+
+  // 2. ดึงอัตโนมัติซ้ำทุกๆ 15 วินาที เพื่อให้ผู้ใช้อื่นๆ เห็นตัวเลข Realtime สดใหม่เสมอ
+  const realtimeInterval = setInterval(() => {
+    // ดึงเฉพาะเวลาที่หน้าเว็บเปิดทำงานอยู่ (ไม่เปลืองทรัพยากรตอนสลับแท็บ)
+    if (!document.hidden) {
+      fetchSheetCount();
+    }
+  }, 15000);
+
+  // 3. เมื่อผู้ใช้สลับแท็บกลับมาดูหน้าเว็บ ให้ดึงค่ายอดล่าสุดทันที
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      fetchSheetCount(true);
+    }
+  });
 
   // Storage Handlers (Local Cache)
   function getRecords() {
@@ -358,13 +408,6 @@ document.addEventListener('DOMContentLoaded', () => {
     list.unshift(record);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
   }
-
-  function updateCounter() {
-    fetchSheetCount();
-  }
-
-  // โหลดจำนวนผู้ตอบเริ่มต้นจาก Google Sheet จริง
-  fetchSheetCount();
 
   // ฟังก์ชันป้องกัน XSS Injection ก่อนแสดงผล
   function escapeHtml(str) {
