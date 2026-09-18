@@ -1,4 +1,4 @@
-// กีฬาสีเชื่อมความสามัคคี 3 หน่วยงาน 2026 - Interactive Form Controller
+// กีฬาสีเชื่อมความสามัคคี 4 หน่วยงาน 2026 - Interactive Form Controller
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('registrationForm');
