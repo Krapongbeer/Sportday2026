@@ -5,7 +5,7 @@
    ========================================================================== */
 
 :root {
-  /* Dynamic Festive Palette (พลังสีสันแห่งงานกีฬาสี) */
+  /* Dynamic Festive Palette (พลังสีสันแห่งงานกีฬาสี + Eco Greenery) */
   --cmu-purple: #6d28d9;
   --cmu-purple-glow: rgba(109, 40, 217, 0.35);
   
@@ -15,9 +15,18 @@
   --color-team-yellow: #f59e0b;
   --color-team-orange: #ea580c;
 
-  --gradient-festive: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f59e0b 100%);
-  --gradient-btn: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
-  --gradient-btn-hover: linear-gradient(135deg, #4338ca 0%, #6d28d9 50%, #be185d 100%);
+  /* Eco Theme Palette */
+  --eco-emerald: #059669;
+  --eco-green: #10b981;
+  --eco-leaf: #16a34a;
+  --eco-mint-bg: #ecfdf5;
+  --eco-border: #a7f3d0;
+  --eco-glow: rgba(16, 185, 129, 0.35);
+
+  --gradient-festive: linear-gradient(135deg, #6366f1 0%, #10b981 35%, #ec4899 70%, #f59e0b 100%);
+  --gradient-eco: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+  --gradient-btn: linear-gradient(135deg, #059669 0%, #6d28d9 55%, #db2777 100%);
+  --gradient-btn-hover: linear-gradient(135deg, #047857 0%, #5b21b6 55%, #be185d 100%);
 
   /* Neutral Spectrum */
   --slate-900: #0f172a;
@@ -129,6 +138,17 @@ body {
   animation-delay: -12s;
 }
 
+/* สีเขียวมรกต Eco Green */
+.sphere-eco {
+  width: 580px;
+  height: 580px;
+  background: radial-gradient(circle, #10b981 0%, rgba(16, 185, 129, 0) 70%);
+  top: 50%;
+  left: -150px;
+  animation-delay: -8s;
+  opacity: 0.45;
+}
+
 @keyframes orbDrift {
   0% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(40px, 30px) scale(1.08); }
@@ -172,11 +192,35 @@ body {
   align-items: center;
   gap: 10px;
   background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(216, 180, 254, 0.8);
-  box-shadow: 0 6px 20px rgba(109, 40, 217, 0.14);
+  border: 1px solid rgba(167, 243, 208, 0.9);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.15), 0 2px 8px rgba(109, 40, 217, 0.08);
   padding: 8px 22px;
   border-radius: var(--radius-full);
   margin-bottom: 18px;
+}
+
+.pill-divider {
+  color: var(--slate-300);
+  font-weight: 300;
+  font-size: 0.85rem;
+}
+
+.pill-eco-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--eco-emerald);
+  background: var(--eco-mint-bg);
+  border: 1px solid var(--eco-border);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.pill-eco-tag svg {
+  color: var(--eco-emerald);
 }
 
 .pulse-dot {
@@ -215,10 +259,22 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #7c3aed 0%, #db2777 45%, #ea580c 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #059669 40%, #db2777 75%, #ea580c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+}
+
+.eco-subtitle {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--eco-emerald);
+  margin-top: 8px;
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .main-desc {
@@ -277,6 +333,17 @@ body {
 .highlight-stat .stat-number {
   color: #7c3aed;
   font-size: 1.25rem;
+}
+
+.eco-highlight {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-radius: var(--radius-full);
+  border: 1px solid #a7f3d0;
+}
+
+.eco-highlight .stat-label {
+  color: var(--eco-emerald);
+  font-weight: 700;
 }
 
 /* ==========================================================================
@@ -855,6 +922,14 @@ label {
   color: var(--slate-500);
   font-size: 0.85rem;
   line-height: 1.6;
+}
+
+.eco-footer-tag {
+  font-weight: 700;
+  color: var(--eco-emerald);
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
 }
 
 /* ==========================================================================

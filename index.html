@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>OOU COLOR GAMES 2026 | มหกรรมกีฬาสีเชื่อมความสามัคคี</title>
+  <title>OOU COLOR GAMES 2026 | CMU Together to ECO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Dynamic Ambient Glow & Grid Background (Color Games Spectrum) -->
+  <!-- Dynamic Ambient Glow & Grid Background (Color Games Spectrum + Eco Greenery) -->
   <div class="bg-mesh">
     <div class="glow-sphere sphere-1"></div>
     <div class="glow-sphere sphere-2"></div>
     <div class="glow-sphere sphere-3"></div>
+    <div class="glow-sphere sphere-eco"></div>
     <div class="bg-grid-overlay"></div>
   </div>
 
@@ -26,10 +27,13 @@
       <div class="brand-pill">
         <span class="pulse-dot"></span>
         <span class="pill-text">OOU COLOR GAMES 2026</span>
+        <span class="pill-divider">|</span>
+        <span class="pill-eco-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg> CMU TOGETHER TO ECO</span>
       </div>
       <h1 class="main-title">
         มหกรรมกีฬาสีเชื่อมความสามัคคี <br>
         <span class="gradient-text">สานสัมพันธ์ 4 หน่วยงาน 2026</span>
+        <span class="eco-subtitle">🌿 CMU Together to ECO 🌿</span>
       </h1>
       <p class="main-desc">
         กีฬาสีหน่วยงานภายใต้สังกัดสำนักงานมหาวิทยาลัย, สำนักงานสภามหาวิทยาลัยเชียงใหม่, <br>
@@ -38,6 +42,11 @@
 
       <!-- Quick Concept Ribbon with Live Responses Counter -->
       <div class="hero-stats">
+        <div class="stat-item eco-highlight">
+          <span class="stat-number">🌱</span>
+          <span class="stat-label">Together to ECO</span>
+        </div>
+        <div class="stat-divider"></div>
         <div class="stat-item">
           <span class="stat-number">🏢</span>
           <span class="stat-label">4 หน่วยงาน</span>
@@ -105,10 +114,10 @@
               <span class="validation-msg" id="fullNameError">กรุณากรอกชื่อ-นามสกุล</span>
             </div>
 
-            <!-- 2. e-mail มหาวิทยาลัย (@cmu.ac.th เท่านั้น) -->
+            <!-- 2. อีเมลติดต่อ -->
             <div class="form-group" id="universityEmailGroup">
               <label for="universityEmail">
-                E-mail มหาวิทยาลัย (@cmu.ac.th) <span class="required">*</span>
+                อีเมลสำหรับติดต่อ (E-mail) <span class="required">*</span>
               </label>
               <div class="input-container">
                 <div class="input-icon">
@@ -118,12 +127,12 @@
                   type="email" 
                   id="universityEmail" 
                   name="universityEmail" 
-                  placeholder="เช่น firstname.lastname@cmu.ac.th" 
+                  placeholder="เช่น example@cmu.ac.th หรือ user@gmail.com" 
                   maxlength="120"
                   required
                 >
               </div>
-              <span class="validation-msg" id="universityEmailError">กรุณาใช้อีเมลมหาวิทยาลัย (@cmu.ac.th เท่านั้น)</span>
+              <span class="validation-msg" id="universityEmailError">กรุณากรอกรูปแบบอีเมลให้ถูกต้อง</span>
             </div>
           </div>
 
@@ -358,6 +367,7 @@
     </main>
 
     <footer class="app-footer">
+      <p class="eco-footer-tag">🌱 OOU Color Games 2026 • CMU Together to ECO</p>
       <p>© 2026 กีฬาสีเชื่อมความสามัคคี | สำนักงานมหาวิทยาลัย • สำนักงานสภามหาวิทยาลัยเชียงใหม่ • สำนักงานการตรวจสอบภายใน • สำนักพัฒนาคุณภาพการศึกษา</p>
     </footer>
   </div>
@@ -391,6 +401,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=20260917-realtime"></script>
+  <script src="app.js?v=20261107-eco"></script>
 </body>
 </html>

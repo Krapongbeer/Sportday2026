@@ -148,8 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function isValidEmail(email) {
-    // ต้องลงท้ายด้วย @cmu.ac.th เท่านั้น (Case-insensitive)
-    return /^[^\s@]+@cmu\.ac\.th$/i.test(email.trim());
+    // ตรวจสอบรูปแบบอีเมลมาตรฐานทั่วไป (ไม่ล็อคเฉพาะ @cmu.ac.th)
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   }
 
   // 5. Submit Event
@@ -166,13 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
       clearError(fullNameInput, fullNameError);
     }
 
-    // ตรวจสอบอีเมล ต้องเป็น @cmu.ac.th เท่านั้น และห้ามซ้ำ
+    // ตรวจสอบอีเมล รูปแบบถูกต้อง และห้ามซ้ำ
     const emailVal = universityEmailInput.value.trim().toLowerCase();
     if (!emailVal) {
-      showError(universityEmailInput, universityEmailError, 'กรุณากรอก E-mail มหาวิทยาลัย');
+      showError(universityEmailInput, universityEmailError, 'กรุณากรอกอีเมลสำหรับติดต่อ');
       isValid = false;
     } else if (!isValidEmail(emailVal)) {
-      showError(universityEmailInput, universityEmailError, 'กรุณาใช้อีเมลมหาวิทยาลัยที่ลงท้ายด้วย @cmu.ac.th เท่านั้น');
+      showError(universityEmailInput, universityEmailError, 'กรุณากรอกรูปแบบอีเมลให้ถูกต้อง (เช่น name@domain.com)');
       isValid = false;
     } else if (isEmailAlreadyRegistered(emailVal)) {
       showError(universityEmailInput, universityEmailError, '⚠️ อีเมลนี้ลงทะเบียนเรียบร้อยแล้ว ไม่สามารถลงทะเบียนซ้ำได้');
